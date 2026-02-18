@@ -1,0 +1,6 @@
+# Ignore arquivos de build e dependências
+node_modules/
+dist/
+build/
+.env
+.env.local

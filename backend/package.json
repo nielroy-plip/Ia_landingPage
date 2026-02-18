@@ -1,0 +1,18 @@
+// Configuração do backend (exemplo de package.json para API, Prisma, etc)
+{
+  "name": "ia-landing-backend",
+  "private": true,
+  "scripts": {
+    "dev": "ts-node src/index.ts",
+    "prisma": "prisma"
+  },
+  "dependencies": {
+    "@prisma/client": "^7.4.0",
+    "openai": "^4.104.0"
+  },
+  "devDependencies": {
+    "prisma": "^7.4.0",
+    "typescript": "^5.9.3",
+    "ts-node": "^10.9.2"
+  }
+}

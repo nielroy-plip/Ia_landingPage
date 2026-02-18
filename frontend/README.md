@@ -1,21 +1,22 @@
 # LandingPro – SaaS de Geração de Landing Pages com IA
 
+![LandingPro Banner](https://user-images.githubusercontent.com/landingpro/banner.png)
+
+## Visão Geral
 LandingPro é um SaaS moderno para geração automática de landing pages de alta conversão usando inteligência artificial. O frontend é construído com Next.js 14, TypeScript e TailwindCSS, seguindo padrões premium de UI/UX.
 
 ## Funcionalidades
 - Cadastro e login de usuários (Supabase Auth)
-- Geração de landing pages com IA (OpenAI)
+- Geração de landing pages com IA
 - Dashboard para gerenciamento de páginas
 - Design responsivo, minimalista e focado em conversão
 - Componentização total e design system próprio
 
 ## Tecnologias
-- **Framework:** Next.js 14 (App Router)
-- **Linguagem:** TypeScript
-- **Styling:** Tailwind CSS
-- **Database/Auth:** Supabase (PostgreSQL)
-- **AI:** OpenAI API
-- **Deploy:** Vercel
+- [Next.js 14 (App Router)](https://nextjs.org/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [TailwindCSS](https://tailwindcss.com/)
+- [Supabase](https://supabase.com/) (Auth e Database)
 
 ## Como rodar localmente
 1. **Clone o repositório:**
@@ -47,7 +48,7 @@ frontend/
   src/
 	 app/           # App Router, páginas e layouts
 	 components/    # Componentes reutilizáveis (UI, layout, landing-page)
-	 lib/           # Helpers, clients e integrações (ex: supabase, openai)
+	 lib/           # Helpers, clients e integrações (ex: supabase)
 	 types/         # Tipos TypeScript globais
   public/          # Assets estáticos
   tailwind.config.js
