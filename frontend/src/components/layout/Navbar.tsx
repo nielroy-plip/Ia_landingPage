@@ -1,7 +1,11 @@
 "use client"
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 
 export default function Navbar() {
+  const pathname = usePathname()
+  const isDashboardRoute = pathname?.startsWith('/dashboard')
+
   return (
     <nav className="sticky top-0 z-40 w-full bg-white/80 backdrop-blur border-b border-slate-200 shadow-sm transition-all duration-300">
       <div className="max-w-6xl mx-auto flex h-20 items-center justify-between px-8">
@@ -11,10 +15,12 @@ export default function Navbar() {
           LandingPro
         </Link>
         {/* Ações */}
-        <div className="flex items-center gap-4">
-          <Link href="/login" className="px-5 py-2 rounded-xl font-medium text-gray-700 hover:bg-indigo-50 hover:text-indigo-700 focus:ring-2 focus:ring-indigo-300 transition-all duration-200">Entrar</Link>
-          <Link href="/register" className="px-5 py-2 rounded-xl font-semibold bg-indigo-600 text-white shadow-md hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-400 transition-all duration-200">Criar Conta</Link>
-        </div>
+        {!isDashboardRoute && (
+          <div className="flex items-center gap-4">
+            <Link href="/login" className="px-5 py-2 rounded-xl font-medium text-gray-700 hover:bg-indigo-50 hover:text-indigo-700 focus:ring-2 focus:ring-indigo-300 transition-all duration-200">Entrar</Link>
+            <Link href="/register" className="px-5 py-2 rounded-xl font-semibold bg-indigo-600 text-white shadow-md hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-400 transition-all duration-200">Criar Conta</Link>
+          </div>
+        )}
       </div>
     </nav>
   )

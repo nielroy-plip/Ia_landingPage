@@ -5,6 +5,7 @@ generator client {
 datasource db {
   provider = "postgresql"
   url = env("DATABASE_URL")
+  schemas  = ["public"]
 }
 
 model Profile {
@@ -15,6 +16,7 @@ model Profile {
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
   landingPages LandingPage[] @relation("UserLandingPages")
+  @@schema("public")
 }
 
 model LandingPage {
@@ -28,6 +30,25 @@ model LandingPage {
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
   user      Profile  @relation(fields: [user_id], references: [id], name: "UserLandingPages")
+  versions  LandingPageVersion[]
+  @@index([user_id])
+  @@schema("public")
+}
+
+model LandingPageVersion {
+  id              String   @id @default(uuid())
+  landing_page_id String
+  version_number  Int
+  title           String
+  briefing        Json?
+  content         Json
+  reason          String?
+  created_at      DateTime @default(now())
+  landingPage     LandingPage @relation(fields: [landing_page_id], references: [id], onDelete: Cascade)
+
+  @@unique([landing_page_id, version_number])
+  @@index([landing_page_id, created_at])
+  @@schema("public")
 }
 
 model AnonymousPreview {
@@ -37,4 +58,5 @@ model AnonymousPreview {
   briefing   Json?
   expires_at DateTime
   created_at DateTime @default(now())
+  @@schema("public")
 }

@@ -15,6 +15,23 @@
 import { createServerClient, type CookieOptions } from '@supabase/ssr'
 import { NextResponse, type NextRequest } from 'next/server'
 
+function getFirstValidUrl(...values: Array<string | undefined>) {
+  for (const value of values) {
+    if (!value) continue
+
+    try {
+      const parsed = new URL(value)
+      if (parsed.protocol === 'http:' || parsed.protocol === 'https:') {
+        return value
+      }
+    } catch {
+      continue
+    }
+  }
+
+  return undefined
+}
+
 export async function middleware(request: NextRequest) {
   let response = NextResponse.next({
     request: {
@@ -22,12 +39,28 @@ export async function middleware(request: NextRequest) {
     },
   })
 
+  const supabaseUrl = getFirstValidUrl(
+    process.env.NEXT_PUBLIC_SUPABASE_URL,
+    process.env.SUPABASE_URL
+  )
+  const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ?? process.env.SUPABASE_ANON_KEY
+
+  if (!supabaseUrl || !supabaseAnonKey) {
+    return NextResponse.json(
+      {
+        error:
+          'Supabase não configurado. Defina NEXT_PUBLIC_SUPABASE_URL e NEXT_PUBLIC_SUPABASE_ANON_KEY.',
+      },
+      { status: 500 }
+    )
+  }
+
   // Criar cliente Supabase para o middleware
   // Não podemos usar o createClient de /lib/supabase/server.ts aqui
   // porque o middleware tem seu próprio contexto de cookies
   const supabase = createServerClient(
-    process.env.SUPABASE_URL!,
-    process.env.SUPABASE_ANON_KEY!,
+    supabaseUrl,
+    supabaseAnonKey,
     {
       cookies: {
         get(name: string) {

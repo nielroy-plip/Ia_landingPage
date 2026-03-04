@@ -1,9 +1,12 @@
 "use client"
 import Button from '@/components/ui/button'
+import Navbar from '@/components/layout/Navbar'
 
 export default function Home() {
   return (
-    <main className="bg-gradient-to-br from-indigo-50 via-white to-blue-100">
+    <>
+      <Navbar />
+      <main className="bg-gradient-to-br from-indigo-50 via-white to-blue-100">
       {/* Hero Section */}
       <section className="py-28 md:py-40 bg-gradient-to-b from-white to-slate-50">
         <div className="max-w-7xl mx-auto px-8 flex flex-col md:flex-row items-center justify-between gap-16">
@@ -114,6 +117,7 @@ export default function Home() {
           </div>
         </div>
       </section>
-    </main>
+      </main>
+    </>
   )
 }

@@ -1,7 +1,6 @@
 'use client'
 
 import './globals.css'
-import Navbar from '@/components/layout/Navbar'
 
 export default function RootLayout({
   children,
@@ -17,7 +16,6 @@ export default function RootLayout({
           <div className="absolute right-[-10%] bottom-[-10%] w-[40vw] h-[30vw] bg-blue-200/30 blur-2xl rounded-full" />
         </div>
         <div className="relative z-10 min-h-screen flex flex-col">
-          <Navbar />
           <main className="flex-1 flex flex-col w-full">
             {children}
           </main>
